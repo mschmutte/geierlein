@@ -1,0 +1,74 @@
+label.ui-input-text, input.ui-input-text {
+    display: inline-block;
+}
+
+.control-group > label {
+    width: 15%;
+    padding-right: 1%;
+    padding-top: 13px;
+    text-align: right;
+}
+
+.control-group > label.span6 {
+    width: 55%;
+}
+
+.control-group.error input {
+    border-color: #b94a48;
+    color: #b94a48;
+}
+
+.ui-checkbox {
+    margin-left: 16%;
+    width: 79%;
+}
+
+.ui-checkbox > label {
+    float: none;
+}
+
+div.span1 {
+    width: 19%;
+    padding-right: 1%;
+}
+
+div.span2 {
+    width: 39%;
+    padding-right: 1%;
+}
+
+div.span3 {
+    width: 59%;
+    padding-right: 1%;
+}
+
+div.span4 {
+    width: 79%;
+    padding-right: 1%;
+}
+
+.add-on, .schnell, .hide-mobile, .hide, #nav, .accordion-heading {
+    display: none;
+}
+
+input#plz {
+    width: 95%;
+}
+
+input[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.control-group input {
+}
+
+.control-group {
+    clear: both;
+}
+
+/* .ui-select */
+[class^="span"], .control-label {
+    float: left;
+}
+

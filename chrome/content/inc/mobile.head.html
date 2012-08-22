@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+<html lang="de">
+<head>
+    <title>Geierlein - der freie Elster-Client</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Stefan Siegl <stesie@brokenpipe.de>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" />
+    <link rel="stylesheet" href="css/geierlein.mobile.css" />
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script>
+        $(document).on('mobileinit', function() {
+            $.mobile.defaultPageTransition = 'slide';
+        });
+
+        $(document).on('ready', function() {
+            $('#welcome')
+            .on('swipeleft', function() {
+                $.mobile.changePage('#address');
+            });
+
+            $('#address')
+            .on('swipeleft', function() {
+                $.mobile.changePage('#data');
+            })
+            .on('swiperight', function() {
+                $.mobile.changePage('#welcome', { reverse: true });
+            });
+
+            $('#data')
+            .on('swiperight', function() {
+                $.mobile.changePage('#address', { reverse: true });
+            });
+        });
+    </script>
+    <script src="js/jquery.mobile-1.1.1.min.js"></script>
+</head> 

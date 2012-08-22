@@ -390,7 +390,9 @@
     /**
      * Initialize tooltips on all input elements.
      */
-    $('.ustva').tooltip();
+    if(typeof $.fn.tooltip === 'function') {
+        $('.ustva').tooltip();
+    }
 
     /**
      * Trigger browser's print functionality when print-button is clicked in

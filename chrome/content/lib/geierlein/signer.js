@@ -65,7 +65,8 @@ geierlein.Signer.prototype = {
         }
 
         /* Find the signature key by its friendlyName. */
-        var keyBag = p12.getBagsByFriendlyName('signaturekey');
+        var keyBag = p12.getBagsByFriendlyName('signaturekey',
+            forge.pki.oids.pkcs8ShroudedKeyBag);
         if(keyBag.length !== 1) {
             throw {
                 message: 'PKCS#12 PFX has not exactly one ' +
@@ -103,6 +104,7 @@ geierlein.Signer.prototype = {
      */
     sign: function(data) {
         /* calculate digest */
+        data = forge.util.encodeUtf8(data);
         var md = forge.md.sha1.create();
         md.start();
         md.update(data);
@@ -169,7 +171,7 @@ geierlein.Signer.prototype = {
                     sig.writeAttributeString('xmlns:dsig', 'http://www.w3.org/2000/09/xmldsig#');
                     sig.writeAttributeString('Id', 'Sign1');
 
-                    sig.writeString(this.getSignedInfoXml());
+                    sig.writeXml(this.getSignedInfoXml());
                     sig.writeElementString('dsig:SignatureValue', this.signatureStr);
 
                     sig.writeStartElement('dsig:KeyInfo');

@@ -93,13 +93,17 @@ function showResult(result) {
 }
 
 if(argv.sign) {
+    if(argv.sign === true) {
+        console.log('--sign requires an argument, the path to the PFX file.');
+        process.exit(1);
+    }
     process.stderr.write('SoftPSE password: ');
     getPassword(function(password) {
         process.stderr.write('\n');
 
         /* create signer context */
         var signer = new geierlein.Signer();
-        var pfx = require('fs').readFileSync(__dirname + '/../Testzertifikate/test-softpse_rsapss.pfx', 'binary');
+        var pfx = require('fs').readFileSync(argv.sign, 'binary');
         signer.setKeyFromPkcs12Der(pfx, password);
 
         /* run action */
@@ -114,7 +118,7 @@ if(argv.sign) {
 function getPassword(cb) {
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
-    tty.setRawMode(true);
+    process.stdin.setRawMode(true);
     var password = '';
     process.stdin.on('data', function(char) {
         char = char + '';
@@ -123,7 +127,7 @@ function getPassword(cb) {
             case '\n':
             case '\r':
             case '\u0004':  /* C-d */
-                tty.setRawMode(false);
+                process.stdin.setRawMode(false);
                 stdin.pause();
                 cb(password);
                 break;

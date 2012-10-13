@@ -6,8 +6,8 @@ desktopfiledir := $(datadir)/applications
 pkgdatadir := $(datadir)/geierlein
 
 VERSIONMAJOR := 0
-VERSIONMINOR := 3
-VERSIONBUILD := 2
+VERSIONMINOR := 4
+VERSIONBUILD := 0
 VERSION := $(VERSIONMAJOR).$(VERSIONMINOR).$(VERSIONBUILD)
 INSTALL := /usr/bin/install -c
 INSTALL_DATA := $(INSTALL) -m 644
@@ -144,22 +144,32 @@ dist-nsis: wininst.nsi
 install: bin/xgeierlein
 	for file in $(xulapp_essentials); do \
 	  installdir="$${file%/*}"; \
-	  $(INSTALL) -d $(DESTDIR)$(pkgdatadir)/$$installdir; \
-	  $(INSTALL_DATA) -t $(DESTDIR)$(pkgdatadir)/$$installdir $$file; \
+	  $(INSTALL) -d "$(DESTDIR)$(pkgdatadir)/$$installdir"; \
+	  $(INSTALL_DATA) -t "$(DESTDIR)$(pkgdatadir)/$$installdir" "$$file"; \
 	done
-	$(INSTALL_DATA) -t $(DESTDIR)$(desktopfiledir) geierlein.desktop
-	$(INSTALL_DATA) -t $(DESTDIR)$(pixmapdir) geierlein.xpm
-	$(INSTALL) -t $(DESTDIR)$(bindir) bin/xgeierlein
+	$(INSTALL) -d "$(DESTDIR)$(desktopfiledir)"
+	$(INSTALL_DATA) -t "$(DESTDIR)$(desktopfiledir)" geierlein.desktop
+	$(INSTALL) -d "$(DESTDIR)$(pixmapdir)"
+	$(INSTALL_DATA) -t "$(DESTDIR)$(pixmapdir)" geierlein.png
+	$(INSTALL) -d "$(DESTDIR)$(bindir)"
+	$(INSTALL) -t "$(DESTDIR)$(bindir)" bin/xgeierlein
 
 uninstall:
 	rm -vrf $(DESTDIR)$(pkgdatadir)
 	rm -vf $(DESTDIR)$(desktopfiledir)/geierlein.desktop
-	rm -vf $(DESTDIR)$(pixmapdir)/geierlein.xpm
+	rm -vf $(DESTDIR)$(pixmapdir)/geierlein.png
 	rm -vf $(DESTDIR)$(bindir)/bin/xgeierlein
 
-dist: dist-nsis
+geierlein-$(VERSION).tar.gz:
 	git archive-all --prefix geierlein-$(VERSION)/ geierlein-$(VERSION).tar.gz
+
+geierlein-$(VERSION).zip:
 	git archive-all --prefix geierlein-$(VERSION)/ geierlein-$(VERSION).zip
+
+geierlein-$(VERSION).tar.xz: geierlein-$(VERSION).tar.gz
+	gzip -cd $< | xz -ezcv > $@
+
+dist: dist-nsis geierlein-$(VERSION).zip geierlein-$(VERSION).tar.xz
 	git tag V$(VERSION)
 
 test:
@@ -173,7 +183,7 @@ test-all: test-forge test
 bump-version: $(version_files)
 	@if [ "$(NEW_VERSION)" = "" ]; then \
 	  echo NEW_VERSION argument not provided.; \
-	  echo Usage: make update-version NEW_VERSION=0.3.2; \
+	  echo Usage: make update-version NEW_VERSION=0.4.0; \
 	  exit 1; \
 	fi
 	sed -e 's;$(subst .,\.,$(VERSION));$(NEW_VERSION);g' -i $^

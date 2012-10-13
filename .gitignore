@@ -8,3 +8,4 @@ wininst.nsi
 geierlein-*-installer.exe
 geierlein-*.zip
 geierlein-*.tar.*
+chrome/content/mobile.html

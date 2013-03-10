@@ -148,6 +148,10 @@ geierlein.validation.validate = function(ruleset, field) {
     for(var fieldName in rules) {
         if(rules.hasOwnProperty(fieldName)) {
             var rule = rules[fieldName];
+            if(rule === undefined) {
+                console.log("no rules available for " + fieldName);
+                continue;
+            }
             for(var i = 0, max = rule.length; i < max; i ++) {
                 if(rule[i] === undefined) {
                     console.dir(rule);

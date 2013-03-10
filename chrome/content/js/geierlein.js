@@ -358,6 +358,25 @@
     });
 
     /**
+     * Switch between forms on selection change.
+     */
+    $('#formtype').on('change', function() {
+        var formtype = $('#formtype').val();
+        var $toShow = $('.taxform-' + formtype);
+
+        if(formtype === 'ustva' && $('#schnell').hasClass('active')) {
+            $toShow = $toShow.add($('.schnell'));
+        } else {
+            $toShow = $toShow.not($('.schnell'));
+        }
+
+        $('.taxform').not($toShow).hide('slow');
+        $toShow.show('slow');
+    });
+
+    $('.taxform').not('.taxform-ustva').hide();
+
+    /**
      * Send button, click event.
      */
     $('#send').on('click', function(ev) {

@@ -122,7 +122,7 @@
                     <div class="accordion-heading">
                         <h4>
                             <a class="accordion-toggle" data-toggle="collapse" data-target="#accordion-anmeldung">
-                                Voranmeldungszeitraum
+                                Steueranmeldung
                             </a>
                         </h4>
                     </div>
@@ -132,6 +132,16 @@
 
                             <fieldset>
                                 <div class="control-group">
+                                    <label class="control-label span4" for="formtype">Formular</label>
+                                    <div class="span4">
+                                        <select id="formtype" class="span4 ustva">
+                                            <option value="ustva">Umsatzsteuervoranmeldung</option>
+                                            <option value="ustsvza">Dauerfristverlängerung</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
                                     <label class="control-label span4" for="jahr">Jahr</label>
                                     <div class="span4">
                                         <select id="jahr" class="span4 ustva">
@@ -139,7 +149,7 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group">
+                                <div class="control-group taxform taxform-ustva">
                                     <label class="control-label span4" for="zeitraum">Zeitraum</label>
                                     <div class="span4">
                                         <select id="zeitraum" class="span4 ustva">
@@ -177,7 +187,7 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group schnell">
+                                <div class="control-group schnell taxform taxform-ustva">
                                     <label class="control-label span4" for="Kz22">Belege werden eingereicht</label>
                                     <div class="span1">
                                         <input type="checkbox" id="Kz22" class="ustva" value="1"
@@ -185,7 +195,7 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group schnell">
+                                <div class="control-group schnell taxform taxform-ustva">
                                     <label class="control-label span4" for="Kz29">Verrechnung erwünscht</label>
                                     <div class="span1">
                                         <input type="checkbox" id="Kz29" class="ustva" value="1"
@@ -193,11 +203,43 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group schnell">
+                                <div class="control-group schnell taxform taxform-ustva">
                                     <label class="control-label span4" for="Kz26">Widerruf Einzugsermächtigung</label>
                                     <div class="span1">
                                         <input type="checkbox" id="Kz26" class="ustva" value="1"
                                             title="Die Einzugsermächtigung wird ausnahmsweise (z.B. wegen Verrechnungswünschen) für diesen Voranmeldungszeitraum widerrufen.  Ein ggf. verbleibender Restbetrag ist gesondert zu entrichten."/>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="taxform taxform-ustsvza">
+                                <div class="control-group">
+                                    <label class="control-label span4" for="abgabezeitraum">Abgabezeitraum</label>
+                                    <div class="span4">
+                                        <select id="abgabezeitraum" class="span4 ustsvza">
+                                            <option value="monat">Monat</option>
+                                            <option value="quartal">Quartal</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label span4" for="vzvorjahr">
+                                        Summe der verbleibenden UStVZ zzgl. angerechneter Sonder-VZ für das Vorjahr
+                                    </label>
+                                    <div class="span4">
+                                        <input type="text" id="vzvorjahr" class="span4 ustsvza" />
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label span4" for="Kz83">
+                                        Davon 1/11 = <strong>Sondervorauszahlung</strong>
+                                    </label>
+                                    <div class="span4">
+                                        <input type="text" id="Kz38" class="span4 multiply ustsvza"
+                                               data-multiply-field="vzvorjahr" data-multiplicand="0.09090909090909090909"
+                                               disabled/>
                                     </div>
                                 </div>
                             </fieldset>
@@ -206,13 +248,13 @@
                 </div>
             </div>
 
-            <div class="form-actions">
+            <div class="form-actions taxform taxform-ustva">
                 <div class="buttons">
                     <a id="schnell" href="#" class="btn" data-toggle="button"><i class="icon-resize-vertical"></i> Vollständiges Formular</a>
                 </div>
             </div>
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <h4>Innergemeinschaftliche Lieferungen</h4>
                 <div class="control-group">
                     <label class="control-label span4" for="Kz41">Abnehmer <b>mit</b> USt-ID</label>
@@ -239,7 +281,7 @@
                 </div>
             </fieldset>
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <h4>Weitere steuerfreie Umsätze mit Vorsteuerabzug</h4>
                 <div class="control-group">
                     <label class="control-label span4" for="Kz43"><b>Ausfuhrlieferungen</b>, Umsätze § 4 Nr. 2 bis 7 UStG</label>
@@ -250,7 +292,7 @@
                 </div>
             </fieldset>
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <h3>Steuerfreie Umsätze ohne Vorsteuerabzug</h3>
 
                 <div class="control-group">
@@ -264,7 +306,7 @@
 
 
 
-            <fieldset>
+            <fieldset class="taxform taxform-ustva">
                 <h2>Steuerpflichtige Umsätze</h2>
 
                 <div class="control-group">
@@ -306,7 +348,7 @@
                 </div>
             </fieldset>
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <h3>Umsätze Land-/Forstwirtschaft (§ 24 UStG)</h3>
 
                 <div class="control-group">
@@ -330,7 +372,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="taxform taxform-ustva">
                 <h2>Innergemeinschaftliche Erwerbe</h2>
 
                 <h3 class="schnell">Steuerfreie innergemeinschaftliche Erwerbe</h3>
@@ -344,7 +386,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="taxform taxform-ustva">
                 <h3 class="schnell">Steuerpflichtige innergemeinschaftliche Erwerbe</h3>
 
                 <div class="control-group">
@@ -386,7 +428,7 @@
                 </div>
             </fieldset>
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <h4>neuer Fahrzeuge</h4>
                 <div class="control-group">
                     <label class="control-label span4" for="Kz94">von Lieferern <b>ohne</b> USt-IdNr. zum allgemeinen Steuersatz</label>
@@ -401,7 +443,7 @@
                 </div>
             </fieldset>
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <h2>Ergänzende Angaben zu Umsätzen</h2>
 
                 <div class="control-group">
@@ -445,7 +487,7 @@
                 </div>
             </fieldset>
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <h2>Umsätze § 13b Abs. 2 UStG</h2>
 
                 <div class="control-group">
@@ -517,7 +559,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="taxform taxform-ustva">
                 <div class="control-group">
                     <label class="control-label span6" for="ust">
                         <strong>Umsatzsteuer</strong>
@@ -530,7 +572,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="taxform taxform-ustva">
                 <h2>Abziehbare Vorsteuerbeträge</h2>
 
                 <div class="control-group">
@@ -591,7 +633,7 @@
             </fieldset>
 
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <div class="control-group">
                     <label class="control-label span6" for="ust-vost">
                         <strong>Verbleibender Betrag</strong>
@@ -604,7 +646,7 @@
                 </div>
             </fieldset>
 
-            <fieldset class="schnell">
+            <fieldset class="schnell taxform taxform-ustva">
                 <div class="control-group">
                     <label class="control-label span6" for="Kz69">Diverse Sonstige (Kz69)</label>
                     <div class="span2">
@@ -614,7 +656,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="taxform taxform-ustva">
                 <div class="control-group">
                     <label class="control-label span6" for="traglast">
                         <strong>Umsatzsteuer-Vorauszahlung/Überschuss</strong>
@@ -627,7 +669,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="taxform taxform-ustva">
                 <div class="control-group">
                     <label class="control-label span6" for="Kz39">Anrechnung Sondervorauszahlung
                     </label>
@@ -638,7 +680,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="taxform taxform-ustva">
                 <div class="control-group">
                     <label class="control-label span6" for="Kz83">
                         <strong>Verbleibende Umsatzsteuer-VZ</strong>
